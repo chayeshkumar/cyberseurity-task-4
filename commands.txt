@@ -1,0 +1,56 @@
+commands.txt
+-------------
+Firewall Configuration - Kali Linux (UFW)
+Cyber Security Internship Task 4
+
+
+Step 1: Update system packages
+sudo apt update && sudo apt -y upgrade
+
+Step 2: Check if UFW is installed
+sudo ufw status verbose
+
+Step 3: Install UFW if not installed
+sudo apt install -y ufw
+
+Step 4: Allow SSH first (to prevent lockout)
+sudo ufw allow 22/tcp
+
+Step 5: Enable UFW
+sudo ufw enable
+# type y when prompted
+
+Step 6: Check UFW status
+sudo ufw status verbose
+
+Step 7: List current rules (numbered)
+sudo ufw status numbered
+
+Step 8: Block inbound traffic on port 23 (Telnet)
+sudo ufw deny 23/tcp
+
+Step 9: Verify rule added
+sudo ufw status numbered
+
+Step 10: Test rule using nmap
+sudo apt install -y nmap
+nmap -p 23 localhost
+
+Step 11: (Optional) Test from another machine
+nmap -p 23 <your_kali_ip>
+
+Step 12: Allow SSH again (if needed)
+sudo ufw allow 22/tcp
+
+Step 13: Remove the Telnet block rule
+sudo ufw delete deny 23/tcp
+
+Step 14: Check final rules
+sudo ufw status verbose
+
+Step 15: Disable UFW (optional)
+sudo ufw disable
+sudo ufw status
+
+Step 16: Exit terminal
+exit
